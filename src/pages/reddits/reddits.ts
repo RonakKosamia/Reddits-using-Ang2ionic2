@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 //import created service on to the page where you need data
 import{ RedditService } from '../../app/services/reddit.service';
 import{DetailsPage} from '../details/details';
+import { HomePage } from '../home/home';
 /*
   Generated class for the Reddits page.
 
@@ -73,5 +74,12 @@ export class RedditsPage {
 
   }
 
+   logout(){ 
+    window.localStorage.removeItem('username');
+    window.localStorage.removeItem('password');
+ 
+    this.navCtrl.setRoot(HomePage);
+     
+  } 
 
 }

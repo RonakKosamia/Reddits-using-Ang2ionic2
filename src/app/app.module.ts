@@ -3,18 +3,19 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
-//import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings';
 import { RedditsPage } from '../pages/reddits/reddits';
 import{DetailsPage} from '../pages/details/details';
+//import{ Auth} from '../providers/auth';
 
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
     ContactPage,
-    //HomePage,
+    HomePage,
     TabsPage,
     SettingsPage,
     RedditsPage,
@@ -28,12 +29,12 @@ import{DetailsPage} from '../pages/details/details';
     MyApp,
     AboutPage,
     ContactPage,
-    //HomePage,
+    HomePage,
     TabsPage,
     SettingsPage,
     RedditsPage,
     DetailsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}] //, Auth
 })
 export class AppModule {}

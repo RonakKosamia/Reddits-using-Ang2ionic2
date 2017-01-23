@@ -1,23 +1,38 @@
 import { Component } from '@angular/core';
+import { LoadingController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import{ RedditService } from './services/reddit.service';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { HomePage } from '../pages/home/home';
+import{ Auth} from '../providers/auth';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [RedditService]
+  providers: [RedditService,Auth]
 })
 export class MyApp {
-  rootPage = TabsPage;
-
-  constructor(platform: Platform) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
+  rootPage:any= HomePage;
+  loader: any;
+  
+  constructor(public auth : Auth , public loadingCtrl: LoadingController) {
+    this.presentLoading();
+    this.auth.login().then((isLoggedIn) => {
+      if(isLoggedIn){
+       
+      this.rootPage = TabsPage;
+      }else{
+       this.rootPage = HomePage;
+      }
+      this.loader.dismiss();
     });
+  }
+
+  presentLoading() {
+    this.loader = this.loadingCtrl.create({
+      content: "Authenticating...",
+     // duration: 3000
+    });
+    this.loader.present();
   }
 }
